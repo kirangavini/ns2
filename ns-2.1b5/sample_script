@@ -1,0 +1,33 @@
+#!/bin/csh
+
+set alg = leach
+set dirname = "mit/leach_sims"
+set filename = $alg
+set topology_file = "mit/uAMPS/sims/100nodes.txt"
+
+@ num_clusters = 5
+@ eq_energy = 1
+@ init_energy = 2
+@ stop = 3600
+@ x = 1000
+@ y = 1000
+@ bs_x = 50
+@ bs_y = 175
+@ nn = 101
+
+./ns tcl/ex/wireless.tcl  \
+-sc mit/uAMPS/sims/nodescen \
+-rp $alg \
+-x $x \
+-y $y \
+-nn $nn \
+-stop $stop \
+-eq_energy $eq_energy \
+-init_energy $init_energy \
+-filename $filename \
+-dirname $dirname \
+-topo $topology_file \
+-num_clusters $num_clusters \
+-bs_x $bs_x \
+-bs_y $bs_y \
+

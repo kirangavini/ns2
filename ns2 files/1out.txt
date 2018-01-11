@@ -1,0 +1,500 @@
+
+#Create a simulator object
+
+set ns [new Simulator]
+
+
+
+
+#Define different colors for data flows (for NAM)
+
+$ns color 1 Blue
+
+$ns color 2 Red
+
+$ns color 3 yellow
+
+$ns color 4 brown
+
+
+
+
+ 
+
+#Open the NAM trace file
+
+set nf [open 1out.nam w]
+
+$ns namtrace-all $nf
+
+
+
+
+#Define a 'finish' procedure
+
+proc finish {} {
+       
+ global ns nf    
+       
+ $ns flush-trace
+        
+    #Close the NAM trace file
+ 
+     close $nf
+        
+     #Execute NAM on the trace file
+        
+     exec nam 1out.nam &
+        
+     exit 0
+
+}
+
+
+
+
+
+# Configure for Basestation Node
+$ns_ node-config -adhocR1outing $opt(adhocR1outing) \
+                 -llType $opt(ll) \
+                 -macType $opt(mac) \
+                 -ifqType $opt(ifq) \
+                 -ifqLen $opt(ifqlen) \
+                 -antType $opt(ant) \
+                 -propType $opt(prop) \
+                 -phyType $opt(netif) \
+                 -channelType $opt(chan) \
+         -topoInstance $topo \
+                 -wiredR1outing ON \
+         -agentTrace ON \
+                 -r1outerTrace ON \
+                 -macTrace OFF
+
+
+
+# Position (fixed) for base-station nodes (HA & FA).
+
+set BS1 [$ns_ node 1.0.0]
+
+
+
+
+
+
+
+#Create thirty nodes
+
+set n1 [$ns node]
+
+set n1 [$ns node]
+
+set n2 [$ns node]
+
+set n3 [$ns node]
+
+set n4 [$ns node]
+
+set n5 [$ns node]
+
+set n6 [$ns node]
+
+set n7 [$ns node]
+
+set n8 [$ns node]
+
+set n9 [$ns node]
+
+set n10 [$ns node]
+
+set n11 [$ns node]
+
+set n12 [$ns node]
+
+set n13 [$ns node]
+
+set n14 [$ns node]
+
+set n15 [$ns node]
+
+set n16 [$ns node]
+
+set n17 [$ns node]
+
+set n18 [$ns node]
+
+set n19 [$ns node]
+set n20 [$ns node]
+set n21 [$ns node]
+set n22 [$ns node]
+set n23 [$ns node]
+set n24 [$ns node]
+set n25 [$ns node]
+set n26 [$ns node]
+set n27 [$ns node]
+set n28 [$ns node]
+set n29 [$ns node]
+set n30 [$ns node]
+
+
+# Node labeling
+
+$ns_ at 0.0 "$node_(8) vehicle green circle"
+$ns_ at 0.0 "$node_(27)  office yellow circle"
+$ns_ at 0.0 "$node_(19)  office1 red circle"
+$ns_ at 0.0 "$node_(2)  aeroplane pink circle"
+$ns_ at 0.0 "$node_(30) tanker white circle"
+$ns_ at 0.0 "$node_(24)  arsenal blue circle"
+
+
+
+
+
+
+#Create links between the nodes
+
+$ns duplex-link $BS1 $n4 2Mb 5.6ms DropTail
+
+$ns duplex-link  $BS1 $n22 3Mb 5.6ms DropTail
+
+$ns duplex-link $BS1 $n14 4Mb 5.6ms DropTail
+
+$ns duplex-link $BS1 $n9 5.2Mb 5.6ms DropTail
+
+$ns duplex-link $BS1 $n5 6.6Mb 5.6ms DropTail
+
+$ns duplex-link $BS1 $n4 7.9Mb 5.6ms DropTail
+
+$ns duplex-link $n4 $n3 8.1Mb 5.6ms DropTail
+
+$ns duplex-link $n3 $n1 9.3Mb 5.6ms DropTail
+
+$ns duplex-link $n1 $n2 6.4Mb 5.6ms DropTail
+
+$ns duplex-link $n2 $n8 7.8Mb 5.6ms DropTail
+
+$ns duplex-link $n8 $n7 6.5Mb 5.6ms DropTail
+
+$ns duplex-link $n7 $n6 9.2Mb 5.6ms DropTail
+
+$ns duplex-link $n6 $n5 12Mb 5.6ms DropTail
+
+$ns duplex-link $n8 $n13 11Mb 5.6ms DropTail
+
+$ns duplex-link $n13 $n12 10Mb 5.6ms DropTail
+
+$ns duplex-link $n12 $n11 9.2Mb 5.6ms DropTail
+
+$ns duplex-link $n11 $n10 8.9Mb 5.6ms DropTail
+
+$ns duplex-link $n10 $n9 7.2Mb 5.6ms DropTail
+
+$ns duplex-link $n13 $n19 6.3Mb 5.6ms DropTail
+
+
+$ns duplex-link $n19 $n18 3.1Mb 5.6ms DropTail
+$ns duplex-link $n18 $n17 3.2Mb 5.6ms DropTail
+
+
+$ns duplex-link $n17 $n16 4.1Mb 5.6ms DropTail
+$ns duplex-link $n16 $n15 4.6Mb 5.6ms DropTail
+
+
+$ns duplex-link $n19 $n10 2.8Mb 5.6ms DropTail
+
+
+$ns duplex-link $n10 $n21 11.8Mb 5.6ms DropTail
+
+
+$ns duplex-link $n21 $n27 12.6Mb 5.6ms DropTail
+
+
+$ns duplex-link $n27 $n26 1.2Mb 5.6ms DropTail
+
+
+$ns duplex-link $n26 $n25 1.8Mb 5.6ms DropTail
+
+
+$ns duplex-link $n25 $n24 10.1Mb 5.6ms DropTail
+
+
+$ns duplex-link $n24 $n23 7Mb 5.6ms DropTail
+$ns duplex-link $n23 $n22 5Mb 5.6ms DropTail
+
+
+$ns duplex-link $n27 $n28 4.2Mb 5.6ms DropTail
+
+
+$ns duplex-link $n28 $n29 7.7Mb 5.6ms DropTail
+
+
+$ns duplex-link $n29 $n30 8.7Mb 5.6ms DropTail
+
+
+$ns duplex-link $n30 $n2 9.7Mb 5.6ms DropTail
+
+
+
+
+
+
+
+#Set Queue Size of link (n2-n30) to 48
+#Set Queue Size of link (n2-n8) to 40
+#Set Queue Size of link (n8-n13) to 30
+#Set Queue Size of link (n13-n19) to 50
+#Set Queue Size of link (n21-n27) to 53
+
+
+#Give node position (for NAM)
+
+$ns duplex-link-op $BS1 $n5 orient right
+
+$ns duplex-link-op $n5 $n6 orient right
+
+$ns duplex-link-op $n6 $n7 orient right
+
+$ns duplex-link-op $n7 $n8 orient right
+
+$ns duplex-link-op $n8 $n13 orient left-up(135)
+
+$ns duplex-link-op $n13 $n12 orient down
+
+$ns duplex-link-op $n12 $n11 orient down
+
+$ns duplex-link-op $n11 $n10 orient down
+
+$ns duplex-link-op $n10 $n9 orient down
+
+$ns duplex-link-op $n9 $BS1 orient down
+
+$ns duplex-link-op $BS1 $n22 orient left-down
+(225)
+$ns duplex-link-op $n22 $n23 orient left-down
+(225)
+$ns duplex-link-op $n23 $n24 orient left-down
+(225)
+$ns duplex-link-op $n24 $n25 orient left-down
+(225)
+
+$ns duplex-link-op $n25 $n26 orient left-down
+(225)
+$ns duplex-link-op $n26 $n27 orient left-down
+(225)
+$ns duplex-link-op $BS1 $n14 orient left
+
+$ns duplex-link-op $n14 $n15 orient left
+$ns duplex-link-op $n15 $n16 orient left
+$ns duplex-link-op $n16 $n17 orient left
+
+$ns duplex-link-op $n17 $n18 orient left
+
+$ns duplex-link-op $n18 $n19 orient left
+$ns duplex-link-op $BS1 $n4 orient right-down(270)
+
+$ns duplex-link-op $n4 $n3 orient right-down(270)
+$ns duplex-link-op $n3 $n1 orient right
+$ns duplex-link-op $n1 $n2 orient right
+$ns duplex-link-op $n13 $n19 orient left-down(225)
+
+$ns duplex-link-op $n19 $n10 orient down
+$ns duplex-link-op $n10 $n21 orient down
+$ns duplex-link-op $n21 $n27 orient down
+$ns duplex-link-op $n27 $n28 orient right-up(45)
+$ns duplex-link-op $n28 $n29 orient right-up(45)
+$ns duplex-link-op $n29 $n30 orient right-up(45)
+$ns duplex-link-op $n30 $n2 orient right-up(45)
+
+
+
+
+#Monitor the queue for link (n2-n30). (for NAM)
+
+$ns duplex-link-op $n2 $n30 queuePos 0.5
+
+
+
+
+#Monitor the queue for link (n2-n8). (for NAM)
+
+$ns duplex-link-op $n2 $n8 queuePos 0.5
+
+#Monitor the queue for link (n8-n13). (for NAM)
+
+$ns duplex-link-op $n8 $n13 queuePos 0.5
+
+#Monitor the queue for link (n13-n19). (for NAM)
+
+$ns duplex-link-op $n13 $n19 queuePos 0.5
+#Monitor the queue for link (n21-n27). (for NAM)
+
+$ns duplex-link-op $n21 $n27 queuePos 0.5
+
+
+
+#Setup a TCP connection
+
+set tcp [new Agent/TCP]
+
+$tcp set class_ 2
+
+$ns attach-agent $n21 $tcp
+
+set sink [new Agent/TCPSink]
+
+$ns attach-agent $n26 $sink
+
+$ns connect $tcp $sink
+
+$tcp set fid_ 1
+
+#Setup a FTP over TCP connection
+
+set ftp [new Application/FTP]
+
+$ftp attach-agent $tcp
+
+$ftp set type_ FTP
+
+#Setup a TCP connection
+
+set tcp1 [new Agent/TCP]
+
+$tcp1 set class_ 2
+
+$ns attach-agent $n1 $tcp1
+
+set sink [new Agent/TCPSink]
+
+$ns attach-agent $n6 $sink1
+
+$ns connect $tcp1 $sink1
+
+$tcp1 set fid_ 2
+
+#Setup a FTP over TCP connection
+
+set ftp1 [new Application/FTP]
+
+$ftp1 attach-agent $tcp1
+
+$ftp1 set type_ FTP
+
+
+#Setup a UDP connection
+
+set udp [new Agent/UDP]
+
+$ns attach-agent $n20 $udp
+
+set null [new Agent/Null]
+
+$ns attach-agent $n18 $null
+
+$ns connect $udp $null
+
+$udp set fid_ 
+
+3
+
+
+#Setup a CBR over UDP connection
+
+set cbr [new Application/Traffic/CBR]
+
+$cbr attach-agent $udp
+
+$cbr set type_ CBR
+
+$cbr set packet_size_ 512
+
+$cbr set rate_ 1mb
+$cbr set random_ false
+
+
+
+
+
+
+#Setup a UDP connection
+
+set udp1 [new Agent/UDP]
+
+$ns attach-agent $n14 $udp1
+
+set null [new Agent/Null]
+
+$ns attach-agent $n9 $null
+
+$ns connect $udp1 $null
+
+$udp1 set fid_ 4
+
+
+#Setup a CBR over UDP connection
+
+set cbr1 [new Application/Traffic/CBR]
+
+$cbr1 attach-agent $udp1 
+
+$cbr1 set type_ CBR
+
+$cbr1 set packet_size_ 512
+
+$cbr1 set rate_ 1mb
+
+$cbr1 set random_ false
+
+
+
+
+
+
+
+
+#Schedule events for the CBR and FTP agents
+
+$ns at 0.3 "$cbr start"
+
+$ns at 1.0 "$ftp start"
+$ns at 1.3 "$cbr1 start"
+
+$ns at 2.0 "$ftp1 start"
+$ns at 3.0 "$ftp stop"
+
+$ns at 3.5 "$cbr stop"
+
+$ns at 4.0 "$ftp1 stop"
+
+$ns at 4.5 "$cbr1 stop"
+
+
+#detach tcp and sink agents (not really necessary)
+
+$ns at 4.5 "$ns detach-agent $n21 $tcp ; $ns detach-agent $n26 $sink"; 
+
+"$ns detach-agent $n1 $tcp1 ; $ns detach-agent $n8 $sink1";
+
+
+
+
+
+#Call the finish procedure after 5 seconds of simulation time
+
+$ns at 5.0 "finish"
+
+
+
+
+#Print CBR packet size and interval
+
+puts "CBR packet size = [$cbr set packet_size_]"
+
+puts "CBR interval = [$cbr set interval_]"
+
+
+
+
+#Run the simulation
+
+$ns run
+
